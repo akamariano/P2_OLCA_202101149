@@ -26,4 +26,21 @@ class Nodo{
 		return s;
 	}
 
+	exec(tabla_simbolos, caso_selec = null){
+		let resultado;
+		let salida = document.getElementById("consola");
+		switch(this.token){
+			case "Parametros":
+				resultado = [];
+				for(const hijo of this.hijos){
+					if(hijo.token == "Parametros"){
+						resultado = hijo.ejecutar(tabla_simbolos);
+					}else if(hijo.token == "ID"){
+						resultado.push({ "identificador": hijo.dato, "entorno": hijo.entorno});
+					}
+				}
+				return resultado;
+		}
+	}
+
 }
