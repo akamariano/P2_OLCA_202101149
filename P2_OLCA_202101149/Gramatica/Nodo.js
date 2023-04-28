@@ -34,8 +34,8 @@ class Nodo{
 				resultado = [];
 				for(const hijo of this.hijos){
 					if(hijo.token == "Parametros"){
-						resultado = hijo.ejecutar(tabla_simbolos);
-					}else if(hijo.token == "ID"){
+						resultado = hijo.exec(tabla_simbolos);
+					}else if(hijo.token == "id"){
 						resultado.push({ "identificador": hijo.dato, "entorno": hijo.entorno});
 					}
 				}

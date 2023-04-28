@@ -14,7 +14,7 @@ function Analizar(){
   resultado.calcular_tabla(resultado.arbol);
 
 
-  if(parser.yy.er_l.length != 0 || parser.yy.er_s.length != 0){
+  if(parser.yy.er_l.length == 0 || parser.yy.er_s.length == 0){
     d3.select("#canvas").graphviz()
       .width("45vw") 
       .height("82vh")
