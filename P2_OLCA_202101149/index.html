@@ -4,13 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link  href="https://fonts.googleapis.com/css?family=M PLUS 2" 
+rel="stylesheet" 
+type="text/css">
+    
     <title>Proyecto 2 compiladores 1 </title>
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-<textarea id="entrada"></textarea>
-<button onclick="Analizar()">analizar</button>
-<div id="canvas"></div>
+    <div class="wrap-titulo">
+      <div class="titulo">Typewise</div>
+    </div>
+    <div class="contenido">
+    <div class="wrap-main">
+    <div class="cont-editor">
+    <h3>Entrada</h3>
+    <div class="editor">
+      <div class="line-numbers line-dark">
+        <span></span>
+      </div>
+      <textarea id="entrada" oninput="keyup(this)" onkeydown="keydown(event)"></textarea>
+    </div>
+  </div>
+  <div>
+    <h3>Consola</h3>
+    <div class="editor">
+      <div class="line-numbers">
+        <span></span>
+      </div>
+      <textarea id="consola" disabled></textarea>
+    </div>
+  </div>
+  </div>
+<div class="cont-botones"> 
+<div class="botones">
+  <button onclick="Abrir()" class="btn_abrir">Abrir</button>
+  <button onclick="Analizar()" class="btn_analizar">Analizar</button>
+  <button onclick="Guardar()" class="btn_guardar">Guardar</button>
+</div>
+</div>
+<div class="cont-canvas">
+<div id="canvas-simbolos"></div>
+<div id="canvas-arbol"></div>
+</div>
+</div>
   </body>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
