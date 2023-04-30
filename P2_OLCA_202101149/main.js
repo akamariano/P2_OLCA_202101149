@@ -1,3 +1,8 @@
+paginas_guardadas = [{texto_entrada: "", texto_consola:""}];
+pagina_actual = 0;
+document.getElementById("lbl_pagina").innerHTML = "/1 pags";
+document.getElementById("num_pagina").value = 1;
+document.getElementById("num_pagina").max = 1;
 
 function keyup(event){
   var numberOfLines = event.value.split("\n").length
@@ -10,6 +15,8 @@ function keyup(event){
      event.parentElement.getElementsByClassName("line-numbers")[0].style.height = "";
   }
   event.style.height = numberOfLines*21 + "px";
+  paginas_guardadas[pagina_actual].texto_consola = document.getElementById("consola").value;
+  paginas_guardadas[pagina_actual].texto_entrada = document.getElementById("entrada").value;
 }
 
 function keydown(event){
@@ -23,6 +30,33 @@ function keydown(event){
         }
 }
 
+function cambiar_pagina(){
+  pagina_actual = document.getElementById("num_pagina").value - 1;
+  document.getElementById("consola").value = paginas_guardadas[pagina_actual].texto_consola;
+  document.getElementById("entrada").value = paginas_guardadas[pagina_actual].texto_entrada;
+}
+
+
+function quitar_pagina(){
+  if(paginas_guardadas.length == 1){
+    alert("no se puede borrar la ultima pagina");
+    return;
+  }
+  paginas_guardadas.splice(pagina_actual,1);
+  pagina_actual = 0;
+  document.getElementById("consola").value = paginas_guardadas[pagina_actual].texto_consola;
+  document.getElementById("entrada").value = paginas_guardadas[pagina_actual].texto_entrada;
+  document.getElementById("lbl_pagina").innerHTML = "/"+paginas_guardadas.length+" pags";
+  document.getElementById("num_pagina").max = paginas_guardadas.length;
+  document.getElementById("num_pagina").value = 1;
+}
+
+
+function agregar_pagina(){
+  paginas_guardadas.push({texto_entrada: "", texto_consola:""});
+  document.getElementById("lbl_pagina").innerHTML = "/"+paginas_guardadas.length+" pags";
+  document.getElementById("num_pagina").max = paginas_guardadas.length;
+}
 
 function Abrir(){
   var input = document.createElement('input');
@@ -37,7 +71,7 @@ function Abrir(){
     }
     fr.readAsText(file); 
   }
-  
+  paginas_guardadas[pagina_actual].texto_entrada = document.getElementById("entrada").value;
 }
 
 function Guardar() {
@@ -53,6 +87,7 @@ function Guardar() {
 
   document.body.removeChild(element);
 }
+
 
 
 function Analizar(){
@@ -87,7 +122,7 @@ function Analizar(){
   d3.select("#canvas-arbol").graphviz()
       .renderDot(resultado.arbol.graficar_ast());
   alert("se ha terminado el analisis, los resportes se encuentran en la parte inferior");
-
+  keyup(document.getElementById("consola"));
 }
 
 function graficar_errores(lex,sin){

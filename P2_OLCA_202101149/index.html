@@ -42,6 +42,13 @@ type="text/css">
   <button onclick="Analizar()" class="btn_analizar">Analizar</button>
   <button onclick="Guardar()" class="btn_guardar">Guardar</button>
 </div>
+
+<div class="botones">
+  <button onclick="quitar_pagina()" class="btn_abrir">-</button>
+  <button onclick="agregar_pagina()" class="btn_guardar">+</button>
+  <input type='number' id="num_pagina" min="1" onchange="cambiar_pagina()"/>
+  <label for="num_pagina" id="lbl_pagina"></label>
+</div>
 </div>
 <div class="cont-canvas">
 <div id="canvas-simbolos"></div>
