@@ -92,15 +92,17 @@ function Guardar() {
 
 function Analizar(){
   document.getElementById("consola").value ="";
-
-  d3.select("#canvas-arbol").selectAll("*").remove();
+  document.getElementById("canvas-arbol").classList.add("hidden");
+  document.getElementById("canvas-simbolos").classList.add("hidden");
   var parser = new gramatica.Parser();
   parser.yy = {er_l: [], er_s:[], arbol:[]};
   
   try{
     parser.parse(document.getElementById("entrada").value);
+    document.getElementById("canvas-simbolos").classList.remove("hidden");
   }catch{
     document.getElementById("consola").value = "se encontraron errores en la entrada, revisa el reporte de errores abajo"
+    document.getElementById("canvas-simbolos").classList.remove("hidden");
     d3.select("#canvas-simbolos").graphviz()
       .renderDot(graficar_errores(parser.yy.er_l,parser.yy.er_s));
     return;
@@ -112,11 +114,13 @@ function Analizar(){
       .renderDot(graficar_errores(parser.yy.er_l,parser.yy.er_s));
     return;
   }
+  document.getElementById("canvas-arbol").classList.remove("hidden");
   
   let resultado = new ast(parser.yy.arbol[0]);
   resultado.calcular_entorno(resultado.arbol);
   resultado.calcular_tabla(resultado.arbol);
   resultado.correr_programa();
+  
   d3.select("#canvas-simbolos").graphviz()
       .renderDot(resultado.graficar_tabla());
   d3.select("#canvas-arbol").graphviz()
