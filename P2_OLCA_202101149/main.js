@@ -125,7 +125,7 @@ function Analizar(){
       .renderDot(resultado.graficar_tabla());
   d3.select("#canvas-arbol").graphviz()
       .renderDot(resultado.arbol.graficar_ast());
-  alert("se ha terminado el analisis, los resportes se encuentran en la parte inferior");
+  alert("se ha terminado el analisis, los reportes se encuentran en la parte inferior");
   keyup(document.getElementById("consola"));
 }
 
